@@ -3,7 +3,7 @@ version: "3.9"
 services:
   mcp-server:
     build:
-      context: ./mcp-server
+      context: ./mcp
     container_name: mcp-server
     volumes:
       - ./mcp:/app
@@ -14,7 +14,7 @@ services:
 
   adk:
     build:
-      context: ./adk-agent
+      context: ./adk
     container_name: adk-agent
     volumes:
       - ./adk:/app
