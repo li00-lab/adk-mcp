@@ -1,28 +1,15 @@
-version: "3.9"
-
 services:
-  mcp-server:
+  adk_agent:
     build:
-      context: ./mcp
-    container_name: mcp-server
-    volumes:
-      - ./mcp:/app
-      - /Users/liwenhan/.config/gcloud:/root/.config/gcloud:ro
-    environment:
-      - GOOGLE_APPLICATION_CREDENTIALS=/root/.config/gcloud/application_default_credentials.json
-    command: python main.py
-
-  adk:
-    build:
-      context: ./adk
-    container_name: adk-agent
-    volumes:
-      - ./adk:/app
-      - /Users/liwenhan/.config/gcloud:/root/.config/gcloud:ro
-    environment:
-      - GOOGLE_APPLICATION_CREDENTIALS=/root/.config/gcloud/application_default_credentials.json
-    depends_on:
-      - mcp-server
+      context: ./adk_agent
+      dockerfile: Dockerfile
+    container_name: adk_agent
     ports:
-      - "8081:8080"
-    command: python main.py
+      - "8080:8080"
+    volumes:
+      - .:/app
+      - ~/.config/gcloud:/root/.config/gcloud:ro
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS=/root/.config/gcloud/application_default_credentials.json
+    working_dir: /app
+    command: uvicorn server:app --host 0.0.0.0 --port 8080
