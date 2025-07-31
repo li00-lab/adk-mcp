@@ -1,0 +1,28 @@
+version: "3.9"
+
+services:
+  mcp-server:
+    build:
+      context: ./mcp-server
+    container_name: mcp-server
+    volumes:
+      - ./mcp:/app
+      - /Users/liwenhan/.config/gcloud:/root/.config/gcloud:ro
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS=/root/.config/gcloud/application_default_credentials.json
+    command: python main.py
+
+  adk:
+    build:
+      context: ./adk-agent
+    container_name: adk-agent
+    volumes:
+      - ./adk:/app
+      - /Users/liwenhan/.config/gcloud:/root/.config/gcloud:ro
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS=/root/.config/gcloud/application_default_credentials.json
+    depends_on:
+      - mcp-server
+    ports:
+      - "8080:8080"
+    command: python main.py

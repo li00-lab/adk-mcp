@@ -1,0 +1,6 @@
+google-adk
+google-cloud-aiplatform
+google-cloud-storage
+google-cloud-bigquery
+google-cloud-firestore
+openai
