@@ -1,4 +1,4 @@
-google-adk==0.0.18
+google-adk==1.8.0
 google-cloud-aiplatform
 google-cloud-storage
 google-cloud-bigquery
