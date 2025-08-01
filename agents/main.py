@@ -3,7 +3,7 @@ from google.adk.sessions import InMemorySessionService
 from google.adk.artifacts.in_memory_artifact_service import InMemoryArtifactService
 from google.adk.runners import Runner
 from google.genai import types
-from root_agent import create_agent  # assumes you have agent.py in same directory
+from root_agent import create_agent
 
 async def run_agent():
     session_service = InMemorySessionService()

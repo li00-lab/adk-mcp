@@ -1,8 +1,8 @@
+version: "3.9"
+
 services:
   adk_agent:
-    build:
-      context: ./adk_agent
-      dockerfile: Dockerfile
+    build: .
     container_name: adk_agent
     ports:
       - "8080:8080"
@@ -10,6 +10,7 @@ services:
       - .:/app
       - ~/.config/gcloud:/root/.config/gcloud:ro
     environment:
+      - PYTHONPATH=/app
       - GOOGLE_APPLICATION_CREDENTIALS=/root/.config/gcloud/application_default_credentials.json
-    working_dir: /app
-    command: uvicorn server:app --host 0.0.0.0 --port 8080
+    command: >
+      sh -c "cd /app && uvicorn server:app --host 0.0.0.0 --port 8080"
