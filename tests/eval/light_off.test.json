@@ -1,0 +1,38 @@
+{
+  "eval_set_id": "switch_lights",
+  "eval_cases": [
+    {
+      "eval_id": "turn_off_bedroom",
+      "conversation": [
+        {
+          "user_content": {
+            "parts": [{ "text": "Turn off device_2 in the bedroom" }],
+            "role": "user"
+          },
+          "final_response": {
+            "parts": [{ "text": "I have set device_2 to off." }],
+            "role": "model"
+          },
+          "intermediate_data": {
+            "tool_uses": [
+              {
+                "name": "set_device_info",
+                "args": {
+                  "location": "Bedroom",
+                  "device_id": "device_2",
+                  "status": "OFF"
+                }
+              }
+            ],
+            "intermediate_responses": []
+          }
+        }
+      ],
+      "session_input": {
+        "app_name": "home_automation_agent",
+        "user_id": "test_user",
+        "state": {}
+      }
+    }
+  ]
+}
