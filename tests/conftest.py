@@ -22,18 +22,17 @@ os.environ.setdefault("GOOGLE_CLOUD_LOCATION", "global")
 
 @pytest.fixture(autouse=True)
 def _patch_google(monkeypatch):
-    # Fake ADC → returns (credentials, project_id)
-    monkeypatch.setattr(
-        "google.auth.default", lambda *a, **k: (None, "test-project")
-    )
+    import google.auth
+    monkeypatch.setattr(google.auth, "default", lambda *a, **k: (None, "test-project"))
 
-    # Fake Cloud Logging so .logger() & .log_text() don’t hit the network
-    dummy_logger = mock.Mock(log_text=lambda *args, **kwargs: None)
+    # patch GCP logging client
+    dummy_logger = mock.Mock(log_text=lambda *a, **k: None)
     monkeypatch.setattr(
         "google.cloud.logging.Client",
-        lambda *a, **k: mock.Mock(logger=lambda *_: dummy_logger),
+        lambda *a, **k: mock.Mock(logger=lambda *_: dummy_logger)
     )
 
-    # Minimal env so ADK initialisation doesn’t explode
+    # basic env stub
+    import os
     os.environ.setdefault("GOOGLE_CLOUD_PROJECT", "test-project")
     os.environ.setdefault("GOOGLE_CLOUD_LOCATION", "global")
