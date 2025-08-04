@@ -8,3 +8,5 @@ google-cloud-logging
 pytest
 pytest-asyncio          # for async FastAPI endpoints
 httpx                   # lightweight HTTP client used by FastAPI TestClient
+pandas 
+numpy

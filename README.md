@@ -127,6 +127,11 @@ docker compose exec adk_agent bash
 pytest -q
 ```
 
+```
+docker compose run --rm --entrypoint "" app \
+  bash -c "pytest -q"
+```
+
 ## 🔁 Summary: Your FastAPI Server
 
 | Function                    | Description                                       |
