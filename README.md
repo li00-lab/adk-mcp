@@ -120,6 +120,13 @@ Since the agent runs as a FastAPI app:
 2. Docker + docker-compose makes this portable
 3. You can scale it, monitor it, add tracing, etc.
 
+## Test
+
+```
+docker compose exec adk_agent bash
+pytest -q
+```
+
 ## 🔁 Summary: Your FastAPI Server
 
 | Function                    | Description                                       |
